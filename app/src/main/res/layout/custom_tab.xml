@@ -27,14 +27,6 @@
                 android:layout_marginBottom="8dp"
                 tools:src="@drawable/ic_launcher_background" />
 
-            <TextView
-                android:id="@+id/tv_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:includeFontPadding="false"
-                android:letterSpacing="-0.02"
-                tools:text="메롱" />
 
         </LinearLayout>
 

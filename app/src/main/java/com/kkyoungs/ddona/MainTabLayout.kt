@@ -62,9 +62,9 @@ class MainTabLayout : TabLayout, TabLayout.OnTabSelectedListener {
 //                ContextCompat.getColor(context, R.color.color_main_text_tab_select)
 //            )
 
-            addTabView("부캐 만들기", 0)
+            addTabView( 0)
 
-            addTabView("나의 부캐", 1)
+            addTabView( 1)
 
 
             addOnTabSelectedListener(this)
@@ -79,8 +79,8 @@ class MainTabLayout : TabLayout, TabLayout.OnTabSelectedListener {
     /**
      * 탭 뷰 추가
      */
-    private fun addTabView(tabName: String, menuId: Int) {
-        createTabView(tabName, menuId.toString())?.let {
+    private fun addTabView( menuId: Int) {
+        createTabView(menuId.toString())?.let {
             val tabItem = newTab()
             tabItem.customView = it
             addTab(tabItem)
@@ -90,7 +90,7 @@ class MainTabLayout : TabLayout, TabLayout.OnTabSelectedListener {
     /**
      * 탭 뷰 만들
      */
-    private fun createTabView(tabName: String, menuId: String): View? {
+    private fun createTabView( menuId: String): View? {
         return runCatching {
             // inflate the custom view using data binding
             mBinding = CustomTabBinding.inflate(LayoutInflater.from(context))
@@ -98,13 +98,13 @@ class MainTabLayout : TabLayout, TabLayout.OnTabSelectedListener {
             var imgResource = 0
             when (menuId) {
                 "0" -> {
-                    imgResource = R.drawable.ic_launcher_background
+                    imgResource = R.drawable.menu_tab_selector_create
                     mBinding?.clWithTitle?.setOnClickListener {
                         selectTab(menuId)
                     }
                 }
                 "1" ->{
-                    imgResource = R.drawable.ic_launcher_foreground
+                    imgResource = R.drawable.menu_tab_selector_my
                     mBinding?.clWithTitle?.setOnClickListener {
                         selectTab(menuId)
                     }
@@ -113,7 +113,6 @@ class MainTabLayout : TabLayout, TabLayout.OnTabSelectedListener {
 
             }
 
-            mBinding?.tvTitle?.text = tabName
             mBinding?.clWithTitle?.visibility = VISIBLE
 
             mBinding?.ivWithTitle?.setImageDrawable(AppCompatResources.getDrawable(context, imgResource))
