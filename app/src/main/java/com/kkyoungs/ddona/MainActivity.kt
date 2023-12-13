@@ -2,6 +2,8 @@ package com.kkyoungs.ddona
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.fragment.app.Fragment
+import androidx.viewpager2.widget.ViewPager2
 import com.kkyoungs.ddona.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -11,20 +13,20 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(mBinding.root)
 
         initView()
         initViewPager()
     }
     private fun initView() {
-        mTabLayout = findViewById(R.id.tab_main)
+        mTabLayout = mBinding.tabMain
         mTabLayout?.setOnTabReselected {
             when (it) {
                 0 -> {
-
+                    MakeCharacterContent()
                 }
                 1 ->{
-
+                    MyCharacterContent()
                 }
             }
         }
@@ -44,25 +46,22 @@ class MainActivity : AppCompatActivity() {
             mBinding.vpMain.isUserInputEnabled = false
 
             // ViewPager page scrolled
-//            mBinding.vpMain.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
-//                override fun onPageSelected(position: Int) {
-//                    super.onPageSelected(position)
-//                    kotlin.runCatching {
-//                        getCurrentFragment()?.onInvokeVisible()
-//
-//                        // prevent session timeout not dismissing loading
-//                        mCommLoading?.let {
-//                            if (it.isShowing) {
-//                                it.dismissLoading()
-//                            }
-//                        }
-//                    }
-//                }
-//            })
+            mBinding.vpMain.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+                override fun onPageSelected(position: Int) {
+                    super.onPageSelected(position)
+                    kotlin.runCatching {
+                        onInvokeVisible()
+
+                        // prevent session timeout not dismissing loading
+
+                    }
+                }
+            })
 
             // init Tab
             mTabLayout?.initTab(mBinding.vpMain)
         }
 
+    open fun onInvokeVisible() {}
 
 }

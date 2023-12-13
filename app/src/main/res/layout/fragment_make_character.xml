@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    
+<LinearLayout 
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="47dp"
+        android:id="@+id/ll_title"
+        android:orientation="horizontal">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="9dp"
+            android:layout_centerInParent="true"
+            android:layout_alignParentLeft="true"
+            android:id="@+id/ll_back">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/iv_back"
+            android:background="@drawable/back"/>
+        </RelativeLayout>
+
+            <TextView
+                android:id="@+id/tv_title_q"
+                android:layout_width="75dp"
+                android:layout_height="40dp"
+                android:text="@string/q1"
+                android:gravity="center"
+                android:layout_centerInParent="true"
+                android:background="@drawable/ic_title"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
+
+    </RelativeLayout>
+    
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="32dp"
+        android:id="@+id/ll_step_bar"
+        android:orientation="horizontal"/>
+
+    </LinearLayout>
+</layout>
