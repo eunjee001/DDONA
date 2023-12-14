@@ -2,9 +2,14 @@ package com.kkyoungs.ddona
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
+import androidx.lifecycle.ReportFragment.Companion.reportFragment
 import androidx.viewpager2.widget.ViewPager2
 import com.kkyoungs.ddona.databinding.ActivityMainBinding
 import com.kkyoungs.ddona.myCharacter.MyCharacterContent
+import com.kkyoungs.ddona.question.GoMakeMeContent
 import com.kkyoungs.ddona.question.MakeCharacterContent
 
 
@@ -26,7 +31,7 @@ class MainActivity : AppCompatActivity() {
         mTabLayout?.setOnTabReselected {
             when (it) {
                 0 -> {
-                    MakeCharacterContent()
+                    GoMakeMeContent()
                 }
                 1 ->{
                     MyCharacterContent()
@@ -38,7 +43,7 @@ class MainActivity : AppCompatActivity() {
     }
     private fun initViewPager() {
             mViewPagerAdapter = MainViewPagerAdapter(supportFragmentManager, lifecycle).apply {
-                addFragment(MakeCharacterContent())
+                addFragment(GoMakeMeContent())
                 addFragment(MyCharacterContent())
 
                 mBinding.vpMain.adapter = this

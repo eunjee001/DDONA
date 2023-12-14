@@ -49,17 +49,17 @@ class MakeCharacterContent : Fragment() {
     fun init(){
     }
     private fun stepBar(){
-        val qlist = arrayOf(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16)
+        val qlist = arrayOf(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18)
         val gridBlockAdapter = GridBlockAdapter(requireContext(), qlist)
         binding!!.gridView.adapter = gridBlockAdapter
-        val questionNumber = 1
+        val questionNumber = 18
 
         val callGet = RetrofitClient.apiService.getMbtiQuestion(questionNumber)
         callGet.enqueue(object : Callback<QuestionData> {
             override fun onResponse(call: Call<QuestionData>, response: Response<QuestionData>) {
                 if (response.isSuccessful) {
                     val mbtiQuestionResponse = response.body()
-                    println(">>>mbtiQuestionResponse" +mbtiQuestionResponse?.answers.toString())
+                    println(">>>mbtiQuestionResponse" +mbtiQuestionResponse?.quenstion.toString())
                     // TODO: 서버 응답 처리
                 } else {
                     // TODO: 서버 응답 실패 처리
