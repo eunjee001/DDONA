@@ -1,7 +1,7 @@
 package com.kkyoungs.ddona.retrofit
 
-import com.kkyoungs.ddona.MbtiCalculationResponse
-import com.kkyoungs.ddona.QuestionData
+import com.kkyoungs.ddona.question.data.MbtiCalculationResponse
+import com.kkyoungs.ddona.question.data.QuestionData
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.GET

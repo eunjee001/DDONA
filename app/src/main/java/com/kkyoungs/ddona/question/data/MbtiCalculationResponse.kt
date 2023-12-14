@@ -1,4 +1,4 @@
-package com.kkyoungs.ddona
+package com.kkyoungs.ddona.question.data
 
 
 data class MbtiCalculationResponse(

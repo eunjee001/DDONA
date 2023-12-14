@@ -1,4 +1,4 @@
-package com.kkyoungs.ddona
+package com.kkyoungs.ddona.question
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.ImageView
+import com.kkyoungs.ddona.R
 
 class GridBlockAdapter(val context:Context, val qlist : Array<Int>) : BaseAdapter(){
     override fun getCount(): Int {

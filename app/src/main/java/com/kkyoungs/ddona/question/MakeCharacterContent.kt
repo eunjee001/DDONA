@@ -1,4 +1,4 @@
-package com.kkyoungs.ddona
+package com.kkyoungs.ddona.question
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,7 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import com.kkyoungs.ddona.R
 import com.kkyoungs.ddona.databinding.FragmentMakeCharacterBinding
+import com.kkyoungs.ddona.question.data.MbtiCalculationResponse
+import com.kkyoungs.ddona.question.data.QuestionData
 import com.kkyoungs.ddona.retrofit.MbtiCalculationRequest
 import com.kkyoungs.ddona.retrofit.RetrofitClient
 import com.kkyoungs.ddona.retrofit.ShopService
@@ -34,7 +37,8 @@ class MakeCharacterContent : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_make_character, container, false)
+        binding = DataBindingUtil.inflate(inflater,
+            R.layout.fragment_make_character, container, false)
         init()
         stepBar()
 
@@ -49,7 +53,7 @@ class MakeCharacterContent : Fragment() {
         val gridBlockAdapter = GridBlockAdapter(requireContext(), qlist)
         binding!!.gridView.adapter = gridBlockAdapter
         val questionNumber = 1
-        
+
         val callGet = RetrofitClient.apiService.getMbtiQuestion(questionNumber)
         callGet.enqueue(object : Callback<QuestionData> {
             override fun onResponse(call: Call<QuestionData>, response: Response<QuestionData>) {

@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.viewpager2.widget.ViewPager2
 import com.kkyoungs.ddona.databinding.ActivityMainBinding
+import com.kkyoungs.ddona.myCharacter.MyCharacterContent
+import com.kkyoungs.ddona.question.MakeCharacterContent
 
 
 class MainActivity : AppCompatActivity() {

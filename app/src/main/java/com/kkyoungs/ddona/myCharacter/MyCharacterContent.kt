@@ -1,4 +1,4 @@
-package com.kkyoungs.ddona
+package com.kkyoungs.ddona.myCharacter
 
 import android.os.Bundle
 import android.view.View

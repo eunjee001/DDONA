@@ -1,12 +1,9 @@
-package com.kkyoungs.ddona
+package com.kkyoungs.ddona.question
 
 import android.content.Context
-import android.util.AttributeSet
 import android.view.LayoutInflater
-import android.widget.ImageView
 import android.widget.LinearLayout
-import com.bumptech.glide.Glide
-import com.kkyoungs.ddona.databinding.FragmentMakeCharacterBinding
+import com.kkyoungs.ddona.R
 
 class StepBlock(context: Context) : LinearLayout(context) {
 
