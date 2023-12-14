@@ -2,9 +2,9 @@ package com.kkyoungs.ddona
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
 import com.kkyoungs.ddona.databinding.ActivityMainBinding
+
 
 class MainActivity : AppCompatActivity() {
     private var mTabLayout: MainTabLayout? = null
@@ -17,6 +17,7 @@ class MainActivity : AppCompatActivity() {
 
         initView()
         initViewPager()
+
     }
     private fun initView() {
         mTabLayout = mBinding.tabMain
