@@ -65,12 +65,15 @@
         android:id="@+id/tv_question"
         android:layout_marginTop="36dp"
         android:layout_marginHorizontal="15dp"
-        android:text="문제다 문제다 문제다 문제다 문제 ~"
         android:textColor="#DDDDDD"
         android:textSize="18dp"
         android:layout_gravity="center"/>
 
-
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:id="@+id/q_check">
     <LinearLayout
         android:id="@+id/ll_q1"
         android:layout_width="match_parent"
@@ -90,7 +93,6 @@
         android:layout_height="60dp"
         android:layout_marginTop="10dp"
         android:gravity="center"
-        android:text="너는 문제야"
         android:textSize="18dp"
         android:textStyle="bold"
         android:textColor="@color/text_selector"
@@ -118,7 +120,6 @@
             android:layout_height="60dp"
             android:layout_marginTop="10dp"
             android:gravity="center"
-            android:text="너는 문제야"
             android:textSize="18dp"
             android:textStyle="bold"
             android:textColor="@color/text_selector"
@@ -146,7 +147,6 @@
             android:layout_height="60dp"
             android:layout_marginTop="10dp"
             android:gravity="center"
-            android:text="너는 문제야"
             android:textSize="18dp"
             android:textStyle="bold"
             android:textColor="@color/text_selector"
@@ -154,6 +154,21 @@
             android:layout_marginHorizontal="17dp"
             android:id="@+id/btn_q3"/>
     </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/q_write"
+        android:orientation="vertical">
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/et_name"
+            android:hint="이름을 적어주세요"
+            />
+
+  </LinearLayout>
     </LinearLayout>
     </FrameLayout>
 </layout>

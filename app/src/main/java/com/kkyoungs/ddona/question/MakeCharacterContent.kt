@@ -77,13 +77,14 @@ class MakeCharacterContent : Fragment() {
 
                     binding!!.tvTitleQ.text = "Q" + questionNumber
                     binding!!.tvQuestion.text = mbtiQuestionResponse?.quenstion.toString()
-                    var answer = mbtiQuestionResponse?.answers.toString()
+                    var answer = mbtiQuestionResponse?.answers
                     val regex = "[#IENSFTJP?]"
-                    answer = answer.replace(regex.toRegex(), "")
-                    val answerArray = answer.split(",")
-                    binding!!.btnQ1.text = answerArray[0]
-                    binding!!.btnQ2.text = answerArray[1]
-                    binding!!.btnQ3.text = answerArray[2]
+                    val firstQt = answer!![0].replace(regex.toRegex(), "")
+                    val secondQt = answer[1].replace(regex.toRegex(), "")
+                    val thirdQt =  answer[2].replace(regex.toRegex(), "")
+                    binding!!.btnQ1.text = firstQt
+                    binding!!.btnQ2.text = secondQt
+                    binding!!.btnQ3.text = thirdQt
 
                 } else {
                     println(" 서버 애러")
