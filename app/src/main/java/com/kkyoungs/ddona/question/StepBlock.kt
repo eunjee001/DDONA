@@ -14,7 +14,5 @@ class StepBlock(context: Context) : LinearLayout(context) {
             val inflater:LayoutInflater  = context!!.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
             inflater.inflate(R.layout.layout_step,this, false)
 
-
         }
-
 }

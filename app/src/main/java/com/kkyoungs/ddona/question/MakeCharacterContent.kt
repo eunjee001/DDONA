@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.GridLayoutManager
 import com.kkyoungs.ddona.R
 import com.kkyoungs.ddona.databinding.FragmentMakeCharacterBinding
 import com.kkyoungs.ddona.question.data.MbtiCalculationResponse
@@ -44,25 +45,48 @@ class MakeCharacterContent : Fragment() {
 
         getService()
         calculator()
+        click()
         return binding!!.root
     }
-    fun init(){
+    private fun init(){
+        binding!!.llBack.setOnClickListener {
+            val transaction = activity?.supportFragmentManager?.beginTransaction()
+            transaction!!.replace(R.id.frame, GoInfoContent())
+            transaction.disallowAddToBackStack()
+            transaction.commit()
+        }
     }
-    private fun stepBar(){
-        val qlist = arrayOf(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18)
+    var questionNumber = 1
+    private fun stepBar() {
+        val qlist = arrayOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19)
+
+
         val gridBlockAdapter = GridBlockAdapter(requireContext(), qlist)
-        binding!!.gridView.adapter = gridBlockAdapter
-        val questionNumber = 18
+        binding!!.gridView.apply {
+            adapter = gridBlockAdapter
+            layoutManager = GridLayoutManager(context, 10)
+
+        }
+        gridBlockAdapter.position = questionNumber - 1
 
         val callGet = RetrofitClient.apiService.getMbtiQuestion(questionNumber)
         callGet.enqueue(object : Callback<QuestionData> {
             override fun onResponse(call: Call<QuestionData>, response: Response<QuestionData>) {
                 if (response.isSuccessful) {
                     val mbtiQuestionResponse = response.body()
-                    println(">>>mbtiQuestionResponse" +mbtiQuestionResponse?.quenstion.toString())
-                    // TODO: 서버 응답 처리
+
+                    binding!!.tvTitleQ.text = "Q" + questionNumber
+                    binding!!.tvQuestion.text = mbtiQuestionResponse?.quenstion.toString()
+                    var answer = mbtiQuestionResponse?.answers.toString()
+                    val regex = "[#IENSFTJP?]"
+                    answer = answer.replace(regex.toRegex(), "")
+                    val answerArray = answer.split(",")
+                    binding!!.btnQ1.text = answerArray[0]
+                    binding!!.btnQ2.text = answerArray[1]
+                    binding!!.btnQ3.text = answerArray[2]
+
                 } else {
-                    // TODO: 서버 응답 실패 처리
+                    println(" 서버 애러")
                 }
             }
 
@@ -70,7 +94,23 @@ class MakeCharacterContent : Fragment() {
                 // TODO: 네트워크 요청 실패 처리
             }
         })
+     }
+
+    private fun click (){
+        binding!!.btnQ1.setOnClickListener {
+            questionNumber++
+            stepBar()
+        }
+        binding!!.btnQ2.setOnClickListener {
+            questionNumber++
+            stepBar()
+        }
+        binding!!.btnQ3.setOnClickListener {
+            questionNumber++
+            stepBar()
+        }
     }
+
 
     private fun calculator(){
         val mbtiCalculationRequest = MbtiCalculationRequest(mbtiScores)
@@ -80,7 +120,6 @@ class MakeCharacterContent : Fragment() {
                 if (response.isSuccessful) {
                     val mbtiCalculationResponse = response.body()
                     // TODO: 서버 응답 처리
-                    println(">>>mbtiCalculationResponse: ${mbtiCalculationResponse?.name}")
                 } else {
                     // TODO: 서버 응답 실패 처리
                 }
