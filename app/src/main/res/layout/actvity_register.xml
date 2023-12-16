@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="#191919">    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="47dp"
+        android:id="@+id/ll_title"
+        android:orientation="horizontal">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="17dp"
+            android:layout_centerInParent="true"
+            android:layout_alignParentLeft="true"
+            android:id="@+id/ll_back">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/iv_back"
+                android:background="@drawable/back"/>
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+        <TextView
+            android:layout_below="@id/ll_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="회원가입"
+            android:id="@+id/tv_login"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:layout_marginLeft="17dp"
+            android:layout_marginTop="12dp"/>
+
+
+        <LinearLayout
+            android:layout_below="@id/tv_login"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/ll_id"
+            android:orientation="vertical">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/id"
+            android:textColor="@color/white"
+            android:text="아이디"
+            android:textSize="14dp"
+            android:layout_marginTop="19dp"
+            android:layout_marginLeft="17dp"
+            />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginTop="10dp"
+            android:id="@+id/et_id"
+            android:singleLine="true"
+            android:imeOptions="actionDone"
+            android:layout_marginHorizontal="17dp"
+            android:textColor="@color/black"
+            android:hint="아이디를 입력해주세요!"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:background="@drawable/ic_question_btn"
+            />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/id_info"
+                android:textColor="#A0AAFF"
+                android:text="사용가능한 아이디에요"
+                android:textSize="14dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="17dp"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_below="@id/ll_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/ll_pw"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/pw"
+                android:textColor="@color/white"
+                android:text="비밀번호"
+                android:textSize="14dp"
+                android:layout_marginTop="37dp"
+                android:layout_marginLeft="17dp"
+                />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginTop="10dp"
+                android:id="@+id/et_pw"
+                android:singleLine="true"
+                android:imeOptions="actionDone"
+                android:layout_marginHorizontal="17dp"
+                android:textColor="@color/black"
+                android:hint="비밀번호를 입력해주세요!"
+                android:textStyle="bold"
+                android:inputType="textPassword"
+                android:gravity="center"
+                android:background="@drawable/ic_question_btn"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/pw_info"
+                android:textColor="@color/white"
+                android:text="8자 이상 영문, 숫자, 특수문자"
+                android:textSize="14dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="17dp"
+                />
+        </LinearLayout>
+
+        <View
+            android:layout_below="@id/ll_pw"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:id="@+id/view"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="37dp"
+            android:background="@color/white"/>
+
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:text="회원가입"
+            android:layout_alignParentBottom="true"
+            android:textSize="18dp"
+            android:textStyle="bold"
+            android:clickable="false"
+            android:textColor="@color/white"
+            android:layout_marginBottom="65dp"
+            android:background="@drawable/ic_question_btn"
+            android:layout_marginHorizontal="17dp"
+            android:id="@+id/btn_go_chat"/>
+
+    </RelativeLayout>
+
+
+</layout>

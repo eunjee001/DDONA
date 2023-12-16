@@ -45,6 +45,16 @@
             android:text="@string/q1"
             android:textColor="@color/white"
             android:textStyle="bold" />
+        <TextView
+            android:id="@+id/tv_title_info_first"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:text="부캐가 완성 되었습니다."
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:visibility="gone"/>
 
     </RelativeLayout>
     <androidx.recyclerview.widget.RecyclerView
@@ -186,6 +196,7 @@
             android:singleLine="true"
             android:imeOptions="actionDone"
             android:layout_marginHorizontal="17dp"
+            android:textColor="@color/black"
             android:hint="이름을 적어주세요"
             android:textStyle="bold"
             android:gravity="center"
@@ -217,7 +228,7 @@
         </LinearLayout>
   </RelativeLayout>
     <RelativeLayout
-        android:visibility="gone"
+        android:visibility="visible"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/ll_complete_character"
@@ -233,9 +244,20 @@
             android:gravity="center"
             android:orientation="vertical">
 
+            <TextView
+                android:id="@+id/tv_nickname"
+                android:layout_width="134dp"
+                android:layout_height="46dp"
+                android:background="@drawable/ic_title"
+                android:gravity="center"
+                android:text="부캐 이름"
+                android:textSize="22dp"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
             <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_marginTop="10dp"
+                android:layout_width="290dp"
+                android:layout_height="230dp"
                 android:id="@+id/iv_character"
                 android:scaleType="fitXY"/>
 

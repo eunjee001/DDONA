@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".chatting.ChattingActivity"
+    >
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#191919"
+       >
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:id="@+id/ll_title">
+            
+            <ImageView
+                android:layout_centerVertical="true"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginLeft="16dp"
+                android:id="@+id/iv_back"
+                android:background="@drawable/arrow_back"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv_nickname"
+                android:layout_centerInParent="true"
+                android:text="부캐이름"
+                android:textColor="#dddddd"
+                android:textStyle="bold"
+                android:textSize="18dp"/>
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ic_chatting_info"
+            android:layout_below="@id/ll_title"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="15dp"
+            android:paddingVertical="14dp"
+            android:paddingHorizontal="40dp"
+            android:visibility="visible"
+            android:gravity="center">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv_info"
+                android:text="@string/info_chat"
+                android:textColor="#DDDDDD"
+                android:textSize="14dp"/>
+        </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_below="@id/ll_info"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/chat_recyclerview"
+            android:layout_above="@id/chat"
+            android:layout_marginTop="10dp"
+            />
+        <RelativeLayout
+            android:id="@+id/chat"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/color_2C2C2D"
+            android:layout_alignParentBottom="true"
+            >
+
+            <Button
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_alignParentLeft="true"
+                android:background="@drawable/icon_pluscancel"
+                android:id="@+id/plus"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="36dp"
+            android:layout_toRightOf="@id/plus"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="19dp"
+            android:textColor="@color/white"
+            android:paddingHorizontal="6dp"
+            android:background="@drawable/ic_chatting_write"
+            android:inputType="textPersonName"
+            android:id="@+id/editText"/>
+        <Button
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginRight="19dp"
+            android:layout_alignParentRight="true"
+            android:clickable="false"
+            android:background="@drawable/icon_send"
+            android:id="@+id/button"/>
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+
+</layout>

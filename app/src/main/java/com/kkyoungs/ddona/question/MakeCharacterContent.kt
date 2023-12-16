@@ -1,8 +1,10 @@
 package com.kkyoungs.ddona.question
 
-import android.R.attr.button
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.Context.MODE_PRIVATE
+import android.content.Intent
+import android.content.SharedPreferences
 import android.graphics.Color
 import android.os.Bundle
 import android.text.Editable
@@ -17,14 +19,22 @@ import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
+import com.kkyoungs.ddona.IntentConst
+import com.kkyoungs.ddona.PreferenceUtil
 import com.kkyoungs.ddona.R
+import com.kkyoungs.ddona.chatting.ChatRoomActivity
 import com.kkyoungs.ddona.databinding.FragmentMakeCharacterBinding
+import com.kkyoungs.ddona.login.LoginActivity
+import com.kkyoungs.ddona.login.LoginResponse
+import com.kkyoungs.ddona.login.RegisterActivity
+import com.kkyoungs.ddona.myCharacter.MyCharacterContent
 import com.kkyoungs.ddona.question.data.MbtiCalculationResponse
 import com.kkyoungs.ddona.question.data.QuestionData
 import com.kkyoungs.ddona.question.data.QuestionSelectList
 import com.kkyoungs.ddona.retrofit.MbtiCalculationRequest
 import com.kkyoungs.ddona.retrofit.RetrofitClient
 import com.kkyoungs.ddona.retrofit.ShopService
+import kotlinx.coroutines.newFixedThreadPoolContext
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -35,18 +45,46 @@ import retrofit2.converter.gson.GsonConverterFactory
 class MakeCharacterContent : Fragment() {
     private var binding :FragmentMakeCharacterBinding ?= null
 
+    companion object {
+        lateinit var prefs: PreferenceUtil
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
         binding = DataBindingUtil.inflate(inflater,
             R.layout.fragment_make_character, container, false)
+
         init()
         stepBar()
 
         getService()
         click()
+
+        if (prefs.myEditText!!.isNotEmpty()){
+            binding!!.qWrite.visibility =View.GONE
+            binding!!.qCheck.visibility = View.GONE
+            binding!!.tvQuestion.visibility = View.GONE
+            binding!!.gridView.visibility = View.GONE
+            binding!!.ivBack.visibility = View.GONE
+            binding!!.llCompleteCharacter.visibility = View.VISIBLE
+            binding!!.tvTitleInfoFirst.visibility = View.VISIBLE
+
+            calculator()
+        }else{
+            binding!!.qWrite.visibility =View.GONE
+            binding!!.qCheck.visibility = View.VISIBLE
+            binding!!.tvQuestion.visibility = View.VISIBLE
+            binding!!.gridView.visibility = View.VISIBLE
+            binding!!.ivBack.visibility = View.VISIBLE
+            binding!!.llCompleteCharacter.visibility = View.GONE
+            binding!!.tvTitleInfoFirst.visibility = View.GONE
+
+            stepBar()
+        }
         return binding!!.root
     }
     private fun init(){
@@ -56,6 +94,9 @@ class MakeCharacterContent : Fragment() {
             transaction.disallowAddToBackStack()
             transaction.commit()
         }
+        prefs = PreferenceUtil(requireActivity())
+
+
     }
     private var questionNumber = 1
     var editName : EditText ?=null
@@ -79,6 +120,7 @@ class MakeCharacterContent : Fragment() {
             binding!!.qWrite.visibility = View.VISIBLE
             binding!!.qCheck.visibility = View.GONE
             binding!!.llCompleteCharacter.visibility = View.GONE
+            binding!!.tvTitleInfoFirst.visibility=View.GONE
             binding!!.tvQuestion.text = getString(R.string.last_q19)
             editName!!.addTextChangedListener(object : TextWatcher {
                 override fun beforeTextChanged(
@@ -200,7 +242,16 @@ class MakeCharacterContent : Fragment() {
         binding!!.btnComplete.setOnClickListener {
             val inputMethodManager = requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
             inputMethodManager.hideSoftInputFromWindow(binding!!.etName.windowToken, 0)
+            prefs.myEditText = editName!!.text.toString()
+
             calculator()
+        }
+
+        binding!!.btnGoChat.setOnClickListener {
+            val intent = Intent(activity, ChatRoomActivity::class.java)
+            intent.putExtra(IntentConst.Extras.EXTRA_TYPE, MyCharacterContent.prefs.myCharImg)
+            intent.putExtra(IntentConst.Extras.EXTRA_NICKNAME, MyCharacterContent.prefs.myCharNick)
+            startActivity(intent)
         }
     }
     var totalE = 0
@@ -255,7 +306,12 @@ class MakeCharacterContent : Fragment() {
                     val characterTitle = mbtiCalculationResponse!!.name
                     val characterExplain = mbtiCalculationResponse.description
                     val characterType = mbtiCalculationResponse.type
-
+                    binding!!.btnGoChat.setOnClickListener {
+                        val intent = Intent(activity, LoginActivity::class.java)
+                        intent.putExtra(IntentConst.Extras.EXTRA_TYPE, characterType)
+                        intent.putExtra(IntentConst.Extras.EXTRA_NICKNAME, characterTitle)
+                        startActivity(intent)
+                    }
                     completeCharacter(characterTitle, characterExplain, characterType)
 
                 } else {
@@ -275,12 +331,16 @@ class MakeCharacterContent : Fragment() {
         binding!!.tvQuestion.visibility = View.GONE
         binding!!.gridView.visibility = View.GONE
         binding!!.ivBack.visibility = View.GONE
+        binding!!.tvTitleQ.visibility = View.GONE
+        binding!!.tvTitleInfoFirst.visibility = View.VISIBLE
         binding!!.llCompleteCharacter.visibility = View.VISIBLE
 
-        binding!!.tvTitleQ.text = editName!!.text
+        binding!!.tvNickname.text = prefs.myEditText
         binding!!.tvCharacterTitle.text = characterTitle
         binding!!.tvCharacterExplain.text = characterExplain
-
+        prefs.myCharNick = characterTitle
+        prefs.myCharInfo = characterExplain
+        prefs.myCharImg = characterType
         when (characterType) {
             "ENFJ" -> {
                 binding!!.ivCharacter.setImageResource(R.drawable.property_2_enfj)
@@ -290,45 +350,60 @@ class MakeCharacterContent : Fragment() {
             }
             "ENTJ" -> {
                 binding!!.ivCharacter.setImageResource(R.drawable.property_2_entj)
+
             }
             "ENTP" -> {
                 binding!!.ivCharacter.setImageResource(R.drawable.property_2_entp)
+
             }
             "ESFJ" -> {
                 binding!!.ivCharacter.setImageResource(R.drawable.property_2_esfj)
+
             }
             "ESFP" -> {
                 binding!!.ivCharacter.setImageResource(R.drawable.property_2_esfp)
+
+
             }
             "ESTJ" -> {
                 binding!!.ivCharacter.setImageResource(R.drawable.property_2_estj)
+
             }
             "ESTP" -> {
                 binding!!.ivCharacter.setImageResource(R.drawable.property_2_estp)
+
             }
             "INFJ" -> {
                 binding!!.ivCharacter.setImageResource(R.drawable.property_2_infj)
+
             }
             "INFP" -> {
                 binding!!.ivCharacter.setImageResource(R.drawable.property_2_infp)
+
             }
             "INTJ" -> {
                 binding!!.ivCharacter.setImageResource(R.drawable.property_2_intj)
+
             }
             "INTP" -> {
                 binding!!.ivCharacter.setImageResource(R.drawable.property_2_intp)
+
             }
             "ISFJ" -> {
                 binding!!.ivCharacter.setImageResource(R.drawable.property_2_isfj)
+
             }
             "ISFP" -> {
                 binding!!.ivCharacter.setImageResource(R.drawable.property_2_isfp)
+
             }
             "ISTJ" -> {
                 binding!!.ivCharacter.setImageResource(R.drawable.property_2_istj)
+
             }
             "ISTP" -> {
                 binding!!.ivCharacter.setImageResource(R.drawable.property_2_istp)
+
             }
         }
 

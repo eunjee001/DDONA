@@ -3,4 +3,6 @@
     <string name="q1">Q1</string>
 
     <string name="last_q19">자신의 부캐에게\n지어주고 싶은 이름은?</string>
+    <string name="info_chat">부캐에게 여러 가지를 질문을 던져보세요!\n혹시 특정 상황을 떠올리는 게 어렵게 느껴진다면\n채팅바 왼쪽에 있는 플러스 버튼을 눌러\n오늘의 추천 상황 제안을 이용할 수도 있습니다!</string>
+    <string name="make_id">아직 회원이 아닌가요?\n회원가입하고 나의 부캐와 대화해보세요!</string>
 </resources>

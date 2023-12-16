@@ -48,7 +48,7 @@ class MainTabLayout : TabLayout, TabLayout.OnTabSelectedListener {
     /**
      * 탭 메뉴 초기화
      */
-    fun initTab(viewPager2: ViewPager2) {
+    fun initTab(viewPager2: ViewPager2, pos: Int) {
 
         kotlin.runCatching {
             // 초기화
@@ -69,7 +69,7 @@ class MainTabLayout : TabLayout, TabLayout.OnTabSelectedListener {
 
             addOnTabSelectedListener(this)
 
-            moveTab(0)
+            moveTab(pos)
 
         }.onFailure {
             it.printStackTrace()

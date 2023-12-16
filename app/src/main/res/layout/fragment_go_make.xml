@@ -9,7 +9,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#191919">
-
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingBottom="20dp"
+        >
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="47dp"
@@ -31,6 +35,12 @@
         </RelativeLayout>
 
     </RelativeLayout>
+    
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="450dp"
+        android:layout_centerInParent="true"
+        android:background="@drawable/ddona_info"/>
 
 
     <Button
@@ -38,13 +48,14 @@
         android:layout_height="60dp"
         android:layout_gravity="bottom"
         android:id="@+id/btn_character"
-        android:layout_marginBottom="16dp"
+        android:layout_alignParentBottom="true"
         android:layout_marginHorizontal="16dp"
         android:text="부캐 만들러 가기"
         android:textSize="18dp"
         android:textStyle="bold"
         android:textColor="#ffffff"
         android:background="@drawable/ic_main_go_btn"/>
+    </RelativeLayout>
 
     </FrameLayout>
 </layout>

@@ -1,16 +1,12 @@
 package com.kkyoungs.ddona
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentTransaction
-import androidx.lifecycle.ReportFragment.Companion.reportFragment
 import androidx.viewpager2.widget.ViewPager2
 import com.kkyoungs.ddona.databinding.ActivityMainBinding
 import com.kkyoungs.ddona.myCharacter.MyCharacterContent
 import com.kkyoungs.ddona.question.GoMakeMeContent
-import com.kkyoungs.ddona.question.MakeCharacterContent
 
 
 class MainActivity : AppCompatActivity() {
@@ -18,15 +14,36 @@ class MainActivity : AppCompatActivity() {
     private var mViewPagerAdapter: MainViewPagerAdapter? = null
     private val mBinding by lazy { ActivityMainBinding.inflate(layoutInflater) }
 
+    var pos:String ="0"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(mBinding.root)
+        checkIntentData(intent)
 
-        initView()
-        initViewPager()
+        if (!Appconf.IS_COMPLETE_MAIN_LOAD) {
+            startActivityForResult(
+                Intent(this, SplashActivity::class.java),
+                0
+            )
+        }else {
+            initView()
+
+
+
+            initViewPager(pos)
+
+        }
 
     }
-    private fun initView() {
+    private fun checkIntentData(intent: Intent?) {
+        if (intent != null && intent.hasExtra(IntentConst.Extras.EXTRA_POS)) {
+            val contentData = intent.extras
+                pos = contentData!!.getString(IntentConst.Extras.EXTRA_POS).toString()
+            }
+
+    }
+
+        private fun initView() {
         mTabLayout = mBinding.tabMain
         mTabLayout?.setOnTabReselected {
             when (it) {
@@ -41,7 +58,7 @@ class MainActivity : AppCompatActivity() {
 
 
     }
-    private fun initViewPager() {
+    private fun initViewPager(pos : String) {
             mViewPagerAdapter = MainViewPagerAdapter(supportFragmentManager, lifecycle).apply {
                 addFragment(GoMakeMeContent())
                 addFragment(MyCharacterContent())
@@ -65,9 +82,13 @@ class MainActivity : AppCompatActivity() {
                     }
                 }
             })
+        if (pos == "1" ){
+            mTabLayout!!.initTab(mBinding.vpMain, 1)
+        }else{
+            mTabLayout?.initTab(mBinding.vpMain,0)
 
-            // init Tab
-            mTabLayout?.initTab(mBinding.vpMain)
+        }
+
         }
 
     open fun onInvokeVisible() {}

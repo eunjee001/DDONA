@@ -7,7 +7,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/frame">
-<LinearLayout 
+<RelativeLayout
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -40,11 +40,11 @@
         android:layout_width="match_parent"
         android:layout_height="350dp"
         android:id="@+id/info_image"
+        android:layout_centerInParent="true"
         android:layout_marginHorizontal="16dp"
         android:background="@drawable/info_image"/>
 
 
-    </LinearLayout>
         <Button
             android:layout_width="match_parent"
             android:layout_height="60dp"
@@ -56,6 +56,9 @@
             android:textSize="18dp"
             android:textStyle="bold"
             android:textColor="#ffffff"
+            android:layout_alignParentBottom="true"
             android:background="@drawable/ic_main_go_btn"/>
+</RelativeLayout>
+
     </FrameLayout>
 </layout>
