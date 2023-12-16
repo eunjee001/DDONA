@@ -73,7 +73,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
+        android:visibility="gone"
         android:id="@+id/q_check">
+
     <LinearLayout
         android:id="@+id/ll_q1"
         android:layout_width="match_parent"
@@ -156,19 +158,137 @@
     </LinearLayout>
     </LinearLayout>
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/q_write"
-        android:orientation="vertical">
-        <EditText
+        android:paddingBottom="10dp"
+        android:visibility="gone">
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/et_name"
-            android:hint="이름을 적어주세요"
-            />
+            android:orientation="vertical"
+            android:id="@+id/ll_nm">
 
-  </LinearLayout>
+            <ImageView
+            android:layout_width="34dp"
+            android:layout_height="34dp"
+            android:background="@drawable/q3"
+            android:layout_gravity="center"
+            android:visibility="invisible"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginTop="10dp"
+            android:id="@+id/et_name"
+            android:singleLine="true"
+            android:imeOptions="actionDone"
+            android:layout_marginHorizontal="17dp"
+            android:hint="이름을 적어주세요"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:background="@drawable/ic_name_write"
+            />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_complete"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_alignParentBottom="true"
+            android:orientation="vertical">
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:text="완료하기"
+                android:textSize="18dp"
+                android:textStyle="bold"
+                android:clickable="false"
+                android:textColor="@color/color_868686"
+                android:background="@drawable/ic_question_btn"
+                android:layout_marginHorizontal="17dp"
+                android:id="@+id/btn_complete"/>
+        </LinearLayout>
+  </RelativeLayout>
+    <RelativeLayout
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/ll_complete_character"
+        android:layout_marginTop="15dp"
+        android:paddingBottom="10dp"
+        >
+        <LinearLayout
+            android:layout_centerHorizontal="true"
+            android:layout_width="350dp"
+            android:layout_height="320dp"
+            android:background="@drawable/ic_image"
+            android:id="@+id/ll_image"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/iv_character"
+                android:scaleType="fitXY"/>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_gravity="center"
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:paddingBottom="10dp"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/ic_image_bottom"
+            android:id="@+id/ll_explain"
+            android:gravity="center_horizontal"
+            android:layout_below="@id/ll_image"
+            android:orientation="vertical">
+            
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv_character_title"
+                android:text="내별명별명별명"
+                android:layout_marginTop="17dp"
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                android:textSize="22dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv_character_explain"
+                android:text="내별명별명별명내별명별명별명내별명별명별명내별명별명별명내별명별명별명내별명별명별명내별명별명별명내별명별명별명내별명별명별명내별명별명별명"
+                android:layout_marginTop="7dp"
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                android:textSize="14dp"/>
+            
+        </LinearLayout>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:text="나의 부캐와 대화하러가기"
+            android:layout_alignParentBottom="true"
+            android:textSize="18dp"
+            android:textStyle="bold"
+            android:clickable="false"
+            android:textColor="@color/white"
+            android:background="@drawable/ic_question_btn_click"
+            android:layout_marginHorizontal="17dp"
+            android:id="@+id/btn_go_chat"/>
+
+    </RelativeLayout>
+
     </LinearLayout>
     </FrameLayout>
 </layout>

@@ -1,4 +1,6 @@
 <resources>
     <string name="app_name">DDONA</string>
     <string name="q1">Q1</string>
+
+    <string name="last_q19">자신의 부캐에게\n지어주고 싶은 이름은?</string>
 </resources>
