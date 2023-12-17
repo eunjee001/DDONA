@@ -2,10 +2,15 @@ package com.kkyoungs.ddona.login
 
 import android.content.Intent
 import android.content.SharedPreferences
+import android.graphics.Color
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import com.kkyoungs.ddona.IntentConst
+import com.kkyoungs.ddona.R
 import com.kkyoungs.ddona.chatting.ChatRoomActivity
 import com.kkyoungs.ddona.databinding.ActvityLoginBinding
 import com.kkyoungs.ddona.myCharacter.MyCharacterContent
@@ -24,6 +29,7 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(mBinding.root)
         checkIntentData(intent)
+        buttonEnable()
         mBinding.btnGoChat.setOnClickListener {
             val email = mBinding.etId.text.toString()
             val password = mBinding.etPw.text.toString()
@@ -31,6 +37,7 @@ class LoginActivity : AppCompatActivity() {
 
             login(email, password)
         }
+
         mBinding.register.setOnClickListener {
             val intent = Intent(this, RegisterActivity::class.java)
             intent.putExtra(IntentConst.Extras.EXTRA_TYPE, type)
@@ -38,14 +45,45 @@ class LoginActivity : AppCompatActivity() {
             startActivity(intent)
 
         }
+        mBinding.llBack.setOnClickListener {
+            onBackPressed()
+        }
+    }
+
+    private fun buttonEnable(){
+
+        mBinding.etPw.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(p0: Editable?) {
+                //텍스트를 입력 후
+
+            }
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                //텍스트 입력 전
+            }
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                //텍스트 입력 중
+                if(mBinding.etPw.length() < 4) { // 패스워드의 길이가 4미만이면
+                    mBinding.btnGoChat.isClickable = false // 버튼 클릭할수 없게
+                    mBinding.btnGoChat.setBackgroundResource(R.drawable.ic_question_btn)
+                    mBinding.btnGoChat.setTextColor(ContextCompat.getColor(applicationContext!!, R.color.color_868686))
+                } else {
+                    mBinding.btnGoChat.isClickable = true // 버튼 클릭할수 없게
+                    mBinding.btnGoChat.setBackgroundResource(R.drawable.ic_question_btn_click)
+                    mBinding.btnGoChat.setTextColor(ContextCompat.getColor(applicationContext!!, R.color.white))
+                }
+            }
+        })
     }
     private fun checkIntentData(intent: Intent?) {
         val contentData = intent!!.extras
 
-        if (intent != null && intent.hasExtra(IntentConst.Extras.EXTRA_TYPE)) {
+        if (intent.hasExtra(IntentConst.Extras.EXTRA_TYPE)) {
             type = contentData!!.getString(IntentConst.Extras.EXTRA_TYPE).toString()
-        }else if(intent != null && intent.hasExtra(IntentConst.Extras.EXTRA_NICKNAME)){
+        }
+        if(intent.hasExtra(IntentConst.Extras.EXTRA_NICKNAME)){
             nickName = contentData!!.getString(IntentConst.Extras.EXTRA_NICKNAME).toString()
+            println(">>>>>>>nic" +nickName)
+
 
         }
 
@@ -62,13 +100,14 @@ class LoginActivity : AppCompatActivity() {
                     val loginResponse = response.body()
 
                     val intent = Intent(applicationContext, GoStartActivity::class.java)
+//                    intent.putExtra(IntentConst.Extras)
                     startActivity(intent)
                     // 회원가입 성공 시 처리
                     Toast.makeText(this@LoginActivity, "로그인 성공", Toast.LENGTH_SHORT).show()
                     // 추가적인 로직 구현 가능
                 } else {
                     // 회원가입 실패 시 처리
-                    Toast.makeText(this@LoginActivity, "로그인 실패", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@LoginActivity, "아이디와 비밀번호를 확인해 주세요.", Toast.LENGTH_SHORT).show()
                 }
             }
 
@@ -77,5 +116,10 @@ class LoginActivity : AppCompatActivity() {
                 Toast.makeText(this@LoginActivity, "네트워크 오류", Toast.LENGTH_SHORT).show()
             }
         })
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        finish()
     }
 }

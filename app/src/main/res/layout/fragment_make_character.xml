@@ -16,7 +16,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="47dp"
+        android:layout_height="wrap_content"
         android:id="@+id/ll_title"
         android:orientation="horizontal">
 
@@ -45,18 +45,10 @@
             android:text="@string/q1"
             android:textColor="@color/white"
             android:textStyle="bold" />
-        <TextView
-            android:id="@+id/tv_title_info_first"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:gravity="center"
-            android:text="부캐가 완성 되었습니다."
-            android:textColor="@color/white"
-            android:textStyle="bold"
-            android:visibility="gone"/>
+
 
     </RelativeLayout>
+
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="35dp"
@@ -77,6 +69,17 @@
         android:layout_marginHorizontal="15dp"
         android:textColor="#DDDDDD"
         android:textSize="18dp"
+        android:layout_gravity="center"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tv_complete_title"
+        android:layout_marginTop="40dp"
+        android:layout_marginHorizontal="15dp"
+        android:textColor="#DDDDDD"
+        android:textSize="22dp"
+        android:textStyle="bold"
+        android:visibility="gone"
         android:layout_gravity="center"/>
 
     <LinearLayout
@@ -228,11 +231,11 @@
         </LinearLayout>
   </RelativeLayout>
     <RelativeLayout
-        android:visibility="visible"
+        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/ll_complete_character"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="100dp"
         android:paddingBottom="10dp"
         >
         <LinearLayout
@@ -250,7 +253,6 @@
                 android:layout_height="46dp"
                 android:background="@drawable/ic_title"
                 android:gravity="center"
-                android:text="부캐 이름"
                 android:textSize="22dp"
                 android:textColor="@color/white"
                 android:textStyle="bold" />
@@ -278,7 +280,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/tv_character_title"
-                android:text="내별명별명별명"
                 android:layout_marginTop="17dp"
                 android:textStyle="bold"
                 android:textColor="@color/white"
@@ -287,8 +288,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/tv_character_explain"
-                android:text="내별명별명별명내별명별명별명내별명별명별명내별명별명별명내별명별명별명내별명별명별명내별명별명별명내별명별명별명내별명별명별명내별명별명별명"
                 android:layout_marginTop="7dp"
+                android:paddingBottom="24dp"
+                android:paddingHorizontal="30dp"
                 android:textStyle="bold"
                 android:textColor="@color/white"
                 android:textSize="14dp"/>

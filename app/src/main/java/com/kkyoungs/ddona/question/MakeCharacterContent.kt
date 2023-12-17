@@ -67,21 +67,22 @@ class MakeCharacterContent : Fragment() {
         if (prefs.myEditText!!.isNotEmpty()){
             binding!!.qWrite.visibility =View.GONE
             binding!!.qCheck.visibility = View.GONE
-            binding!!.tvQuestion.visibility = View.GONE
+            binding!!.tvCompleteTitle.visibility = View.VISIBLE
             binding!!.gridView.visibility = View.GONE
             binding!!.ivBack.visibility = View.GONE
+            binding!!.tvQuestion.visibility =View.GONE
             binding!!.llCompleteCharacter.visibility = View.VISIBLE
-            binding!!.tvTitleInfoFirst.visibility = View.VISIBLE
 
             calculator()
         }else{
             binding!!.qWrite.visibility =View.GONE
             binding!!.qCheck.visibility = View.VISIBLE
-            binding!!.tvQuestion.visibility = View.VISIBLE
             binding!!.gridView.visibility = View.VISIBLE
+            binding!!.tvCompleteTitle.visibility = View.GONE
+            binding!!.tvQuestion.visibility =View.VISIBLE
+
             binding!!.ivBack.visibility = View.VISIBLE
             binding!!.llCompleteCharacter.visibility = View.GONE
-            binding!!.tvTitleInfoFirst.visibility = View.GONE
 
             stepBar()
         }
@@ -120,7 +121,6 @@ class MakeCharacterContent : Fragment() {
             binding!!.qWrite.visibility = View.VISIBLE
             binding!!.qCheck.visibility = View.GONE
             binding!!.llCompleteCharacter.visibility = View.GONE
-            binding!!.tvTitleInfoFirst.visibility=View.GONE
             binding!!.tvQuestion.text = getString(R.string.last_q19)
             editName!!.addTextChangedListener(object : TextWatcher {
                 override fun beforeTextChanged(
@@ -306,12 +306,8 @@ class MakeCharacterContent : Fragment() {
                     val characterTitle = mbtiCalculationResponse!!.name
                     val characterExplain = mbtiCalculationResponse.description
                     val characterType = mbtiCalculationResponse.type
-                    binding!!.btnGoChat.setOnClickListener {
-                        val intent = Intent(activity, LoginActivity::class.java)
-                        intent.putExtra(IntentConst.Extras.EXTRA_TYPE, characterType)
-                        intent.putExtra(IntentConst.Extras.EXTRA_NICKNAME, characterTitle)
-                        startActivity(intent)
-                    }
+
+                    println(">>>>>cah" +characterTitle)
                     completeCharacter(characterTitle, characterExplain, characterType)
 
                 } else {
@@ -328,11 +324,13 @@ class MakeCharacterContent : Fragment() {
     private fun completeCharacter(characterTitle:String, characterExplain : String, characterType :String){
         binding!!.qWrite.visibility =View.GONE
         binding!!.qCheck.visibility = View.GONE
-        binding!!.tvQuestion.visibility = View.GONE
         binding!!.gridView.visibility = View.GONE
         binding!!.ivBack.visibility = View.GONE
         binding!!.tvTitleQ.visibility = View.GONE
-        binding!!.tvTitleInfoFirst.visibility = View.VISIBLE
+        binding!!.tvQuestion.visibility =View.GONE
+        binding!!.tvCompleteTitle.visibility = View.VISIBLE
+
+        binding!!.tvCompleteTitle.text = "부캐가 완성 되었습니다."
         binding!!.llCompleteCharacter.visibility = View.VISIBLE
 
         binding!!.tvNickname.text = prefs.myEditText
@@ -341,6 +339,15 @@ class MakeCharacterContent : Fragment() {
         prefs.myCharNick = characterTitle
         prefs.myCharInfo = characterExplain
         prefs.myCharImg = characterType
+
+        binding!!.btnGoChat.setOnClickListener {
+            println(">>>>>>>characterTitle" +characterTitle)
+
+            val intent = Intent(activity, LoginActivity::class.java)
+            intent.putExtra(IntentConst.Extras.EXTRA_TYPE, prefs.myCharImg)
+            intent.putExtra(IntentConst.Extras.EXTRA_NICKNAME, characterTitle)
+            startActivity(intent)
+        }
         when (characterType) {
             "ENFJ" -> {
                 binding!!.ivCharacter.setImageResource(R.drawable.property_2_enfj)
@@ -411,7 +418,7 @@ class MakeCharacterContent : Fragment() {
     }
     private fun getService() : ShopService{
         val retrofit = Retrofit.Builder()
-            .baseUrl("http://43.201.67.203:8080")
+            .baseUrl("http://43.200.179.17:8080")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 

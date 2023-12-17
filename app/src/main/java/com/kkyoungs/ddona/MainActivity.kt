@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.viewpager2.widget.ViewPager2
+import com.kkyoungs.ddona.chatting.ChatRoomActivity
 import com.kkyoungs.ddona.databinding.ActivityMainBinding
 import com.kkyoungs.ddona.myCharacter.MyCharacterContent
 import com.kkyoungs.ddona.question.GoMakeMeContent
@@ -13,12 +14,15 @@ class MainActivity : AppCompatActivity() {
     private var mTabLayout: MainTabLayout? = null
     private var mViewPagerAdapter: MainViewPagerAdapter? = null
     private val mBinding by lazy { ActivityMainBinding.inflate(layoutInflater) }
-
+    companion object {
+        lateinit var prefs: PreferenceUtil
+    }
     var pos:String ="0"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(mBinding.root)
         checkIntentData(intent)
+        prefs = PreferenceUtil(this)
 
         if (!Appconf.IS_COMPLETE_MAIN_LOAD) {
             startActivityForResult(

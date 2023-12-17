@@ -156,7 +156,7 @@
             android:textSize="18dp"
             android:textStyle="bold"
             android:clickable="false"
-            android:textColor="@color/white"
+            android:textColor="#868686"
             android:layout_marginBottom="65dp"
             android:background="@drawable/ic_question_btn"
             android:layout_marginHorizontal="17dp"
