@@ -45,7 +45,7 @@ class MyCharacterContent : Fragment() {
         binding!!.btnGoChat.setOnClickListener {
             val intent = Intent(activity, ChatRoomActivity::class.java)
             intent.putExtra(IntentConst.Extras.EXTRA_PROFIL, prefs.myCharImg)
-            intent.putExtra(IntentConst.Extras.EXTRA_NICKNAME, prefs.myCharNick)
+            intent.putExtra(IntentConst.Extras.EXTRA_NICKNAME, prefs.myEditText)
             startActivity(intent)
         }
         return binding!!.root

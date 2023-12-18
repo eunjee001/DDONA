@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.kkyoungs.ddona.IntentConst
+import com.kkyoungs.ddona.PreferenceUtil
 import com.kkyoungs.ddona.R
 import com.kkyoungs.ddona.chatting.ChatRoomActivity
 import com.kkyoungs.ddona.databinding.ActvityLoginBinding
@@ -25,6 +26,9 @@ class LoginActivity : AppCompatActivity() {
     private val mBinding by lazy { ActvityLoginBinding.inflate(layoutInflater) }
     var nickName : String?= null
     var type : String ?= null
+    companion object {
+        lateinit var prefs: PreferenceUtil
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(mBinding.root)
@@ -37,6 +41,7 @@ class LoginActivity : AppCompatActivity() {
 
             login(email, password)
         }
+        prefs = PreferenceUtil(this)
 
         mBinding.register.setOnClickListener {
             val intent = Intent(this, RegisterActivity::class.java)
@@ -98,6 +103,9 @@ class LoginActivity : AppCompatActivity() {
             override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
                 if (response.isSuccessful) {
                     val loginResponse = response.body()
+                    prefs.token = loginResponse!!.accessToken
+                    println(">>>>>>>loginResponse!!.accessToken" +loginResponse!!.accessToken)
+
 
                     val intent = Intent(applicationContext, GoStartActivity::class.java)
 //                    intent.putExtra(IntentConst.Extras)

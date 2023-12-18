@@ -22,14 +22,14 @@
                 android:background="@drawable/arrow_back"/>
 
             <TextView
+                android:id="@+id/tv_nickname"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/tv_nickname"
                 android:layout_centerInParent="true"
                 android:text="부캐이름"
                 android:textColor="#dddddd"
-                android:textStyle="bold"
-                android:textSize="18dp"/>
+                android:textSize="18dp"
+                android:textStyle="bold" />
 
         </RelativeLayout>
 
@@ -60,12 +60,13 @@
             android:layout_height="match_parent"
             android:id="@+id/chat_recyclerview"
             android:layout_above="@id/chat"
+            android:layout_marginHorizontal="10dp"
             android:layout_marginTop="10dp"
             />
         <RelativeLayout
             android:id="@+id/chat"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="48dp"
             android:background="@color/color_2C2C2D"
             android:layout_alignParentBottom="true"
             >
@@ -73,15 +74,18 @@
             <Button
                 android:layout_width="30dp"
                 android:layout_height="30dp"
+                android:layout_centerVertical="true"
                 android:layout_alignParentLeft="true"
+                android:layout_marginLeft="10dp"
                 android:background="@drawable/icon_pluscancel"
                 android:id="@+id/plus"/>
         <EditText
             android:layout_width="match_parent"
-            android:layout_height="36dp"
+            android:layout_height="40dp"
             android:layout_toRightOf="@id/plus"
             android:layout_marginLeft="8dp"
-            android:layout_marginRight="19dp"
+            android:layout_marginRight="15dp"
+            android:layout_centerVertical="true"
             android:textColor="@color/white"
             android:paddingHorizontal="6dp"
             android:background="@drawable/ic_chatting_write"
@@ -91,6 +95,7 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_marginRight="19dp"
+            android:layout_centerVertical="true"
             android:layout_alignParentRight="true"
             android:clickable="false"
             android:background="@drawable/icon_send"

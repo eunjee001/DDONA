@@ -11,6 +11,8 @@ class PreferenceUtil(context: Context) {
     private val prefsKeyImg = "myCharImg"
     private val prefsKeySend = "send"
     private val prefsKeyReceive = "Receive"
+    private val prefsKeyToken = "token"
+
     private val prefs: SharedPreferences = context.getSharedPreferences(prefsFilename, 0)
 
     var myEditText: String?
@@ -39,4 +41,8 @@ class PreferenceUtil(context: Context) {
     var receive : String?
         get() = prefs.getString(prefsKeyReceive, "")
         set(value) = prefs.edit().putString(prefsKeyReceive, value).apply()
+
+    var token : String?
+        get() = prefs.getString(prefsKeyToken, "")
+        set(value) = prefs.edit().putString(prefsKeyToken, value).apply()
 }

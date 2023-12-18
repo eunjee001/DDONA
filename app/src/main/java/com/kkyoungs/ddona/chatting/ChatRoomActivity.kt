@@ -99,6 +99,8 @@ class ChatRoomActivity: AppCompatActivity() {
             onBackPressed()
         }
 
+        mBinding.tvNickname.text = nickName
+
     }
 
 
@@ -121,7 +123,8 @@ class ChatRoomActivity: AppCompatActivity() {
     }
     private fun chatResponse(){
         val chatRequest = ChatRequest(mBinding.editText.text.toString())
-        val authToken ="eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0dCIsImF1dGgiOiJST0xFX1VTRVIiLCJleHAiOjE3MDI4NjkxMjR9.LlUiYe6SZnszi5gDRE2Xg0EGh4WF1KznGc2ZvxT5FrOzLtTXl7S2SJqjFdPDSyM-E9T5lHAVVvCJkgKcki2fJg"
+        val authToken = prefs.token
+
         val callPost = RetrofitClient.apiService.postChat("Bearer $authToken",chatRequest)
         callPost.enqueue(object : Callback<ChatResponse> {
             override fun onResponse(call: Call<ChatResponse>, response: Response<ChatResponse>) {
@@ -149,6 +152,4 @@ class ChatRoomActivity: AppCompatActivity() {
         super.onBackPressed()
         finish()
     }
-
-
 }

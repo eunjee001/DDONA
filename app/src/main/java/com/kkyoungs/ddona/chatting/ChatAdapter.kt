@@ -46,7 +46,7 @@ class ChatAdapter(private val list: ArrayList<ChatModel>,    private val mContex
     }
 
     override fun onBindViewHolder(viewHolder: RecyclerView.ViewHolder, i: Int) {
-//onCreateViewHolder에서 리턴받은 뷰홀더가 Holder라면 내채팅, item_my_chat의 뷰들을 초기화 해줌
+        //onCreateViewHolder에서 리턴받은 뷰홀더가 Holder라면 내채팅, item_my_chat의 뷰들을 초기화 해줌
         if (viewHolder is ViewHolderMy) {
             bindingMy!!.chatText.text = list.get(i).script
         }
@@ -148,7 +148,7 @@ class ChatAdapter(private val list: ArrayList<ChatModel>,    private val mContex
         preferences = mContext.getSharedPreferences("USERSIGN", Context.MODE_PRIVATE)
         prefs = PreferenceUtil(mContext)
         //내 아이디와 arraylist의 name이 같다면 내꺼 아니면 상대꺼
-        return if (list.get(position).script == prefs.send) {
+        return if (list.get(position).name != prefs.myEditText) {
             1
         } else {
             2

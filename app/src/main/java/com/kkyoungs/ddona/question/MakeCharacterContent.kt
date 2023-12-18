@@ -307,7 +307,6 @@ class MakeCharacterContent : Fragment() {
                     val characterExplain = mbtiCalculationResponse.description
                     val characterType = mbtiCalculationResponse.type
 
-                    println(">>>>>cah" +characterTitle)
                     completeCharacter(characterTitle, characterExplain, characterType)
 
                 } else {
@@ -345,7 +344,7 @@ class MakeCharacterContent : Fragment() {
 
             val intent = Intent(activity, LoginActivity::class.java)
             intent.putExtra(IntentConst.Extras.EXTRA_TYPE, prefs.myCharImg)
-            intent.putExtra(IntentConst.Extras.EXTRA_NICKNAME, characterTitle)
+            intent.putExtra(IntentConst.Extras.EXTRA_NICKNAME, prefs.myEditText)
             startActivity(intent)
         }
         when (characterType) {
