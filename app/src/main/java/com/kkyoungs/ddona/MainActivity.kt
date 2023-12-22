@@ -4,11 +4,9 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.viewpager2.widget.ViewPager2
-import com.kkyoungs.ddona.chatting.ChatRoomActivity
 import com.kkyoungs.ddona.databinding.ActivityMainBinding
 import com.kkyoungs.ddona.myCharacter.MyCharacterContent
 import com.kkyoungs.ddona.question.GoMakeMeContent
-
 
 class MainActivity : AppCompatActivity() {
     private var mTabLayout: MainTabLayout? = null
@@ -44,7 +42,6 @@ class MainActivity : AppCompatActivity() {
             val contentData = intent.extras
                 pos = contentData!!.getString(IntentConst.Extras.EXTRA_POS).toString()
             }
-
     }
 
         private fun initView() {

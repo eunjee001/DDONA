@@ -18,7 +18,6 @@ interface ShopService {
     @GET("/api/mbti/question/{no}")
     fun getMbtiQuestion(@Path("no") questionNumber: Int): Call<QuestionData>
 
-
     @POST("/api/mbti/calculate")
     fun postMbtiCalculation(@Body mbtiCalculationRequest: MbtiCalculationRequest): Call<MbtiCalculationResponse>
 
